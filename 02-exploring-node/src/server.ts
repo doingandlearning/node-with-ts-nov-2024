@@ -6,7 +6,7 @@ import fs from "node:fs";
 // dotenv
 
 const hostname = process.argv[2]; // allows us to access CLI arguments!
-const port = process.env.PORT; // requires .env and --env-file
+const port = parseInt(process.env.PORT || "3000"); // requires .env and --env-file
 const file = fs.readFileSync("./src/team.txt", "utf-8").split("\n");
 
 const server = http.createServer((req, res) => {

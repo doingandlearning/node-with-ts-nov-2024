@@ -22,8 +22,8 @@
 - Introduction
 - Node.js Overview
 - Core JS Concepts
-- Evolution of Async in Node
 - Node.js Module System
+- Evolution of Async in Node
 
 # Day 2: Refactor API to use a Node framework (Express)
 
