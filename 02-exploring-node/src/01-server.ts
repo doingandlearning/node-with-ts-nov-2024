@@ -3,9 +3,10 @@ import http from "node:http";
 import url from "node:url";
 import fs from "node:fs";
 // <script>
+// dotenv
 
-const hostname = "127.0.0.1";
-const port = 3000;
+const hostname = process.argv[2]; // allows us to access CLI arguments!
+const port = process.env.PORT; // requires .env and --env-file
 const file = fs.readFileSync("./src/team.txt", "utf-8").split("\n");
 
 const server = http.createServer((req, res) => {
@@ -19,7 +20,6 @@ const server = http.createServer((req, res) => {
     handleHomePage(res);
     return;
   } else if (path === "/about") {
-    console.log();
     handleAboutPage(res, parsedRequest.query);
     return;
   } else if (path === "/team") {
@@ -57,3 +57,6 @@ function handleTeamPage(res: http.ServerResponse) {
 server.listen(port, hostname, () => {
   console.log(`Server is running at http://${hostname}:${port}`);
 });
+
+// - use command line arguments
+// - environment varaibles
