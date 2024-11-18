@@ -11,7 +11,9 @@ const file = fs.readFileSync("./src/team.txt", "utf-8").split("\n");
 
 const server = http.createServer((req, res) => {
   const parsedRequest = url.parse(req.url!, true);
-  const path = parsedRequest.pathname;
+  const path = parsedRequest.pathname!;
+
+  logRequest(path, parsedRequest.query);
   if (path === "/favicon.ico") {
     return;
   }
@@ -36,12 +38,47 @@ function handleHomePage(res: http.ServerResponse) {
   res.statusCode = 200;
   res.end("Welcome to the homepage!");
 }
-function handleAboutPage(res: http.ServerResponse, query: { name?: string }) {
+
+interface AboutParams {
+  name?: string;
+  lang?: string;
+}
+
+function handleAboutPage(res: http.ServerResponse, query: AboutParams) {
   res.statusCode = 200;
   const name = query.name || "human";
+  const lang = query.lang || "en";
   res.write("Welcome to the about page!");
-  res.end(`<p>Welcome ${name}!</p>`); // Template literals - f"{}"
+  res.end(`<p>${welcomeInLang(lang)} ${name}!</p>`); // Template literals - f"{}"
 }
+
+interface QueryType {
+  [key: string]: string | string[] | undefined;
+}
+
+function logRequest(
+  route: string,
+  query: Record<string, string | string[] | undefined>
+) {
+  const timestamp = new Date().toISOString();
+  const queryString = JSON.stringify(JSON.stringify(query));
+  console.log(`[${timestamp}] Route: ${route}, Query: ${queryString}`);
+}
+
+function welcomeInLang(lang: string) {
+  const langWithCode: Record<string, string> = {
+    en: "Welcome",
+    es: "Bienvendio",
+    fr: "Bienvenue",
+    ja: "ようこそ",
+    da: "Velkommen",
+    de: "Willkommen",
+    // ta: "வரவேற்கிறோம்",
+    ta: "Vanakkam",
+  };
+  return langWithCode[lang];
+}
+
 function handleTeamPage(res: http.ServerResponse) {
   res.statusCode = 200;
 
