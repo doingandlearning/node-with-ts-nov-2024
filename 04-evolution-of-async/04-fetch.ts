@@ -5,10 +5,9 @@ async function runA() {
     "https://api.github.com/users/doingandlearning/repos",
     { signal: ac.signal }
   );
-  const data = await response.json();
+  const data = (await response.json()) as {};
   console.log("User object");
   console.log(data);
-  ac.abort();
 }
 async function runB() {
   const response = await fetch(
@@ -18,7 +17,6 @@ async function runB() {
   const data = await response.json();
   console.log("Repos");
   console.log(data);
-  ac.abort();
 }
 async function runC() {
   const response = await fetch(
@@ -32,5 +30,5 @@ async function runC() {
 }
 
 runA();
-runB();
+// runB();
 // runC();
