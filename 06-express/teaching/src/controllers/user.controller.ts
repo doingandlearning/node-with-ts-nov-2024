@@ -1,9 +1,11 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { User } from "../types/user.types";
 
 const users: User[] = [];
 
-function getAllUsers(req: Request, res: Response) {
+function getAllUsers(req: Request, res: Response, next: NextFunction) {
+  next(new Error("Something went wrong"));
+  return;
   try {
     res.send(users);
   } catch (error) {

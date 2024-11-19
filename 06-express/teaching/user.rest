@@ -1,12 +1,10 @@
-GET http://localhost:3000
-###
 GET http://localhost:3000/api/v1/users
-x-api-key: supersecretcode
+
 ###
 
 POST http://localhost:3000/api/v1/users
 content-type: application/json
-x-api-key: supersecretcode
+# x-api-key: supersecretcode
 
 {
 	"name": "Kevin",

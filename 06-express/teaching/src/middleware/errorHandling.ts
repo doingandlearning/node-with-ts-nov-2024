@@ -8,6 +8,6 @@ export default function errorHandling(
 ) {
   console.log("I was invoked!");
   console.log(err.stack);
-  res.status(400).json({ message: "Something broke." });
+  res.status(400).json({ message: `Something broke. ${err.message}` });
   return;
 }
