@@ -9,20 +9,26 @@ function getRandomInt(max: number): number {
 async function createAbortableFetch(url: string): Promise<any> {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), ABORT_TIMEOUT);
-  return fetch(url, { signal: controller.signal })
-    .then((response) => {
-      clearTimeout(timeout);
-      if (!response.ok)
-        throw new Error(`HTTP error! status: ${response.status}`);
-      return response.json();
-    })
-    .catch((error) => {
-      if (error.name === "AbortError")
-        throw new Error(`Fetch aborted for ${url}`);
-      throw error;
-    });
-}
 
+  try {
+    const response = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeout);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error: any) {
+    clearTimeout(timeout);
+
+    if (error.name === "AbortError") {
+      throw new Error(`Fetch aborted for ${url}`);
+    }
+
+    throw error;
+  }
+}
 async function fetchPersonAsync(id?: number): Promise<any> {
   const personId = id ?? getRandomInt(83);
   return createAbortableFetch(`https://swapi.dev/api/people/${personId}/`);
@@ -56,8 +62,10 @@ async function run() {
     const enrichedPerson = {
       name: person.name,
       height: person.height,
+      hair_color: person.hair_color,
       mass: person.mass,
       homeworld: homeworld?.name ?? "Unknown",
+      homeworld_climate: homeworld.climate,
       species:
         species.length > 0 ? species.map((s) => s.name).join(", ") : "Unknown",
     };
@@ -69,7 +77,9 @@ async function run() {
     writeFileSync(fileName, JSON.stringify(enrichedPerson, null, 2));
     console.log(`Data saved to ${fileName}`);
   } catch (error) {
-    console.error("Error occurred:", error.message);
+    if (error instanceof Error) {
+      console.error("Error occurred:", error.message);
+    }
   }
 }
 

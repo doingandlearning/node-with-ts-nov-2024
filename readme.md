@@ -29,6 +29,8 @@
 
 - Debugging with Node
 - Node.js testing
+  - no testing at the moment
+  - Jest? vitest?
 - RESTful Services
 - Express
 
