@@ -13,7 +13,7 @@ function rateLimitingMiddleware(
 
   const currentTime = Date.now();
 
-  const requestLog = rateLimitMap.get(clientIP) || {
+  const requestLog = rateLimitMap.get(clientIP!) || {
     count: 0,
     lastRequest: currentTime,
   };
@@ -27,7 +27,7 @@ function rateLimitingMiddleware(
   requestLog.count++;
 
   // Update the map with the latest request log
-  rateLimitMap.set(clientIP, requestLog);
+  rateLimitMap.set(clientIP!, requestLog);
 
   // Check if the user has exceeded the limit
   if (requestLog.count > LIMIT) {
