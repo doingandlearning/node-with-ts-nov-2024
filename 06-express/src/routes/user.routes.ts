@@ -1,10 +1,11 @@
 import express, { Router } from "express";
 import users from "../controllers/user.controller";
+import apiKeyAuth from "../middleware/apiKeyAuth";
 const router = Router();
 
 router.use(express.json());
 
-router.route("/").get(users.getAllUsers).post(users.createNewUser); // !
+router.route("/").get(users.getAllUsers).post(apiKeyAuth, users.createNewUser); // !
 
 router
   .route("/:id")

@@ -3,6 +3,7 @@ import userRoutes from "./routes/user.routes";
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.disable("x-powered-by");
 app.use("/api/v1/users", userRoutes);
 
 app.get("/", (req, res) => {
