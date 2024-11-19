@@ -1,0 +1,33 @@
+GET http://localhost:3000/api/v1/users
+
+###
+
+POST http://localhost:3000/api/v1/users
+content-type: application/json
+# x-api-key: supersecretcode
+
+{
+	"name": "Kevin",
+	"location": "Northern Ireland"
+}
+
+###
+
+PATCH http://localhost:3000/api/v1/users/1
+content-type: application/json
+
+{
+	"name": "Kathrin",
+	"location": "Scotland"
+}
+
+###
+GET http://localhost:3000/api/v1/users/1
+
+###
+
+DELETE http://localhost:3000/api/v1/users/1 
+
+###
+
+GET http://localhost:3000/api/v1/something
