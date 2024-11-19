@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unhappy path for the add function > throws an error if called with non-number arguments 2`] = `[TypeError: Add function must only be called with numbers]`;
