@@ -1,5 +1,3 @@
-class LessThanZeroError extends Error {}
-
 function mightThrowError(input: number): number {
   // if the input < 0 throw a custom error
 }
