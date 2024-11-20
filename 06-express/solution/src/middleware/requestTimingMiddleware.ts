@@ -11,7 +11,6 @@ function requestTimingMiddleware(
   }
 
   const start = process.hrtime(); // Start timing
-
   // Hook into the response's 'finish' event to calculate response time
   res.on("finish", () => {
     const [seconds, nanoseconds] = process.hrtime(start);
