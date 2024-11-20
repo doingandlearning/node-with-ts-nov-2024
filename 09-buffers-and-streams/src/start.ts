@@ -17,7 +17,7 @@ class RemoveWordStream extends Transform {
     try {
       const input = chunk.toString();
       const output = input.replaceAll(this.wordToRemove, "");
-      this.push("🥭");
+      this.push(output);
       callback();
     } catch (error) {
       if (error instanceof Error) {
