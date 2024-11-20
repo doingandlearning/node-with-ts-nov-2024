@@ -1,5 +1,5 @@
-import { EventEmitter } from "events";
-import readline, { Interface } from "readline";
+import { EventEmitter } from "node:events";
+import readline, { Interface } from "node:readline";
 
 class ChatSystem extends EventEmitter {
   private users: string[];
