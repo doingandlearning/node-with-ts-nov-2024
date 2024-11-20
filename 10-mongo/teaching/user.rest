@@ -7,26 +7,27 @@ content-type: application/json
 # x-api-key: supersecretcode
 
 {
-	"name": "Kevin",
-	"location": "Northern Ireland"
+	"name": "Kathrin",
+	"location": "Glasgow"
 }
 
 ###
 
-PATCH http://localhost:3000/api/v1/users/1
+PATCH http://localhost:3000/api/v1/users/673e06f9ea4585c1a2b3e9d9
 content-type: application/json
 
 {
-	"name": "Kathrin",
-	"location": "Scotland"
+	"name": "David",
+	"location": "Scotland",
+	"role": "Developer"
 }
 
 ###
-GET http://localhost:3000/api/v1/users/1
+GET http://localhost:3000/api/v1/users/673e07d35f8122eb00254ae3
 
 ###
 
-DELETE http://localhost:3000/api/v1/users/1 
+DELETE http://localhost:3000/api/v1/users/673e06f9ea4585c1a2b3e9d9 
 
 ###
 
